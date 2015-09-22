@@ -44,7 +44,7 @@ public class balogh_lab2 {
 		// Print time difference on dialog window
 		//JOptionPane.showMessageDialog(null, "Time difference: " + diff);	
 
-		// The rest of this is just me experimenting...
+		// The rest of this class is just me experimenting; it is not directly relevant to the assignment!
 		String preposition;
 		if (diffTotalSeconds >= 0) {
 			preposition = "earlier than";
