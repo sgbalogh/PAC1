@@ -4,7 +4,7 @@
  */
 import java.util.Scanner;
 
-public class balogh_calculator {
+public class balogh_lab3 {
     public static void main(String[] args){
         double valueOne;
         double valueTwo;
@@ -23,7 +23,7 @@ public class balogh_calculator {
             System.out.print("Exiting!");
         } else if (operation.equals("c")){
             result = 0.0;
-            System.out.print("Clearing memory!\nThe current value is : " + result + "\n");
+            System.out.print("Clearing memory!\nThe current value is: " + result + "\n");
         } else if (!(operation.equals("+") || operation.equals("-") || operation.equals("*") || operation.equals("/"))) {
             System.out.print("ERROR: '" + operation + "' is an unrecognized operator!\n");
             result = valueOne; // Result gets valueOne so that the entered value is not lost upon entering while-loop
@@ -59,7 +59,7 @@ public class balogh_calculator {
                 System.out.print("Exiting!");
             } else if (operation.equals("c")){
                 result = 0.0;
-                System.out.print("Clearing memory!\nThe current value is : " + result + "\n");
+                System.out.print("Clearing memory!\nThe current value is: " + result + "\n");
             } else if (!(operation.equals("+") || operation.equals("-") || operation.equals("*") || operation.equals("/"))) {
                 System.out.print("ERROR: '" + operation + "' is an unrecognized operator!\n");
             }  else {
