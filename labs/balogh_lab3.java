@@ -1,6 +1,6 @@
 /**
  * Created by Stephen Balogh on 9/26/15
- * 'java balogh_calculator' to run
+ * 'java balogh_lab3' to run
  */
 import java.util.Scanner;
 
