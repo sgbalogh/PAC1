@@ -21,7 +21,7 @@ public class balogh_lab4 {
         /* End of variable declaration and value allocation. */
 
         System.out.print("* Initial Vehicle State *\n");
-        report(carColorChar, ignition, locX, locY); // Generate initial report (display status of vehicle and location on map)
+        report(carColorChar, ignition, locX, locY); // Generate initial report
 
         /* Begin while-loop, will allow user to change position, ignition unlimited number
          * of times until they EXIT program by passing in option '3' at the main menu. */
@@ -43,7 +43,8 @@ public class balogh_lab4 {
                     } while (!(userDirection.equals("H") || userDirection.equals("V")));
 
                     if (userDirection.equals("H")) {
-                        System.out.println("Move horizontally how far? Enter negative values for left, positive for right.");
+                        System.out.println("Move horizontally how far? Enter negative values for left, positive " +
+                                "for right.");
                         distanceMove = userInput.nextInt();
                         System.out.println("Attempting to move horizontally, " + distanceMove + " steps.");
                         locX = moveHorizontal(locX, distanceMove, ignition); // Method returns new X value
@@ -117,7 +118,8 @@ public class balogh_lab4 {
                 break;
         }
 
-        System.out.println("Color: " + carColorString + "\nIgnition status: " + ignition + "\nLocation: (X: " + x + ", Y: " + y + ")\n");
+        System.out.println("Color: " + carColorString + "\nIgnition status: " + ignition + "\nLocation: (X: " + x +
+                ", Y: " + y + ")\n");
 
         /* Begin grid position drawing. */
 
