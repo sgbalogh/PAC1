@@ -99,6 +99,7 @@ public class balogh_lab4 {
         * when invoked. */
         System.out.println();
         String carColorString = "";
+        String ignitionStatus = "";
         switch (carColorChar) {
             /* Associates a color character with the name of that color as a String. */
             case 'R':
@@ -117,8 +118,13 @@ public class balogh_lab4 {
                 carColorString = "silver";
                 break;
         }
+        if (ignition) {
+            ignitionStatus = "on";
+        } else {
+            ignitionStatus = "off";
+        }
 
-        System.out.println("Color: " + carColorString + "\nIgnition status: " + ignition + "\nLocation: (X: " + x +
+        System.out.println("Color: " + carColorString + "\nIgnition: " + ignitionStatus + "\nLocation: (X: " + x +
                 ", Y: " + y + ")\n");
 
         /* Begin grid position drawing. */
