@@ -2,7 +2,6 @@
  * Created by Stephen Balogh on 9/30/15.
  */
 import java.util.Scanner;
-import javax.swing.JOptionPane;
 public class balogh_lab4 {
     public static void main(String[] args){
 
@@ -56,13 +55,13 @@ public class balogh_lab4 {
                     }
                     break;
                 case 3:
-                    System.out.println("\nAdios."); // Exit message
+                    System.out.println("\nAdios. Here is the car as you left it:"); // Exit message
                     dontExit = false; // Switches controller of while-loop to false
                     break;
             }
-            if (dontExit) {
-                report(carColorChar, ignition, locX, locY); // Conditional used to omit final report when exiting
-            }
+
+            report(carColorChar, ignition, locX, locY);
+
         }
     }
 
@@ -163,11 +162,11 @@ public class balogh_lab4 {
             if ( ((x + distanceMove) <= 20 ) && ((x + distanceMove) >= 1 ) ) {
                 return (x + distanceMove);
             } else {
-                System.out.println("THAT WAS TOO FAR!!! The car remains put.");
+                System.out.println("\nTHAT WAS TOO FAR!!! The car remains put.");
                 return (x);
             }
         } else {
-            System.out.println("The car is off. You need to turn it on before moving. It remains put.");
+            System.out.println("\nThe car is off. You need to turn it on before moving. It remains put.");
             return x;
         }
     }
@@ -179,11 +178,11 @@ public class balogh_lab4 {
             if ( ((y + distanceMove) <= 20 ) && ((y + distanceMove) >= 1 ) ) {
                 return (y + distanceMove);
             } else {
-                System.out.println("THAT WAS TOO FAR!!! The car remains put.");
+                System.out.println("\nTHAT WAS TOO FAR!!! The car remains put.");
                 return (y);
             }
         } else {
-            System.out.println("The car is off. You need to turn it on before moving. It remains put.");
+            System.out.println("\nThe car is off. You need to turn it on before moving. It remains put.");
             return y;
         }
     }
