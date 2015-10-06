@@ -1,14 +1,14 @@
 /**
  * Created by Stephen Balogh on 9/30/15.
  *
- * Lab 4: Car
+ * Lab 3: Car
  * A very, very simple simulation of what it is like to own and drive a car.
  *
  */
 
 import java.util.Scanner;
 
-public class balogh_lab4 {
+public class balogh_car {
     public static void main(String[] args) {
 
         /* Begin declaring variables and setting initial values. */
