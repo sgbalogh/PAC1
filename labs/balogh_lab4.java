@@ -1,5 +1,9 @@
 /**
  * Created by Stephen Balogh on 9/30/15.
+ *
+ * Lab 4: Car
+ * A very, very simple simulation of what it is like to own and drive a car.
+ *
  */
 
 import java.util.Scanner;
@@ -25,7 +29,7 @@ public class balogh_lab4 {
         report(carColorChar, ignition, locX, locY); // Generate initial report
 
         /* Begin while-loop, will allow user to change position, ignition unlimited number
-         * of times until they EXIT program by passing in option '3' at the main menu. */
+         * of times until they EXIT program by passing in option 'Q' at the main menu. */
 
         while (dontExit) {
             System.out.println("\nSo what do you want to do now?\n1. toggle the ignition on/off\n" + "" +
@@ -57,7 +61,7 @@ public class balogh_lab4 {
                 }
             } else if (userSelection.equals("Q")) {
                 System.out.println("\nAdios. Here is the car as you left it:"); // Exit message
-                dontExit = false; // Switches controller of while-loop to false
+                dontExit = false;
             } else {
                 System.out.println("\nPlease enter one of the options...");
             }
