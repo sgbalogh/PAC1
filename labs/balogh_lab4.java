@@ -1,9 +1,11 @@
 /**
  * Created by Stephen Balogh on 9/30/15.
  */
+
 import java.util.Scanner;
+
 public class balogh_lab4 {
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         /* Begin declaring variables and setting initial values. */
 
@@ -29,46 +31,45 @@ public class balogh_lab4 {
             System.out.println("\nSo what do you want to do now?\n1. toggle the ignition on/off\n" + "" +
                     "2. change the position of the car\n3. quit this program");
             userSelection = userInput.nextInt(); // Collect selection from user
-            switch (userSelection) {
-                case 1:
-                    ignition = toggleIgnition(ignition); // Use toggleIgnition() to change swap value
-                    break;
-                case 2:
+
+
+            if (userSelection == 1) {
+                ignition = toggleIgnition(ignition); // Use toggleIgnition() to change swap value
+            } else if (userSelection == 2) {
                     /* Uses do/while-loop to ensure that user input is one of two acceptable options, else
                      * they will be asked again. */
-                    do {
-                        System.out.println("Ok. Move in which direction?\nH. Horizontal\nV. Vertical");
-                        userDirection = userInput.next(); // Gathers second-level menu option
-                    } while (!(userDirection.equals("H") || userDirection.equals("V")));
+                do {
+                    System.out.println("Ok. Move in which direction?\nH. Horizontal\nV. Vertical");
+                    userDirection = userInput.next(); // Gathers second-level menu option
+                } while (!(userDirection.equals("H") || userDirection.equals("V")));
 
-                    if (userDirection.equals("H")) {
-                        System.out.println("Move horizontally how far? Enter negative values for left, positive " +
-                                "for right.");
-                        distanceMove = userInput.nextInt();
-                        System.out.println("Attempting to move horizontally, " + distanceMove + " steps.");
-                        locX = moveHorizontal(locX, distanceMove, ignition); // Method returns new X value
-                    } else if (userDirection.equals("V")) {
-                        System.out.println("Move vertically how far? Enter negative values for up, positive for down.");
-                        distanceMove = userInput.nextInt();
-                        System.out.println("Attempting to move vertically, " + distanceMove + " steps.");
-                        locY = moveVertical(locY, distanceMove, ignition); // Method returns new Y value
-                    }
-                    break;
-                case 3:
-                    System.out.println("\nAdios. Here is the car as you left it:"); // Exit message
-                    dontExit = false; // Switches controller of while-loop to false
-                    break;
+                if (userDirection.equals("H")) {
+                    System.out.println("Move horizontally how far? Enter negative values for left, positive " +
+                            "for right.");
+                    distanceMove = userInput.nextInt();
+                    System.out.println("Attempting to move horizontally, " + distanceMove + " steps.");
+                    locX = moveHorizontal(locX, distanceMove, ignition); // Method returns new X value
+                } else if (userDirection.equals("V")) {
+                    System.out.println("Move vertically how far? Enter negative values for up, positive for down.");
+                    distanceMove = userInput.nextInt();
+                    System.out.println("Attempting to move vertically, " + distanceMove + " steps.");
+                    locY = moveVertical(locY, distanceMove, ignition); // Method returns new Y value
+                }
+            } else if (userSelection == 3) {
+                System.out.println("\nAdios. Here is the car as you left it:"); // Exit message
+                dontExit = false; // Switches controller of while-loop to false
+            } else {
+                System.out.println("\nPlease enter one of the options...");
             }
 
             report(carColorChar, ignition, locX, locY);
-
         }
     }
 
     public static char randomColor() {
         /* Uses random number generator, casts result to integer, then assigns characters representing color
          * of car to each of the five possible integers (0-4). */
-        int colorChoose = (int)(Math.random() * 5.00);
+        int colorChoose = (int) (Math.random() * 5.00);
         char carColorChar = ' ';
         switch (colorChoose) {
             case 0:
@@ -87,9 +88,7 @@ public class balogh_lab4 {
                 carColorChar = 'S';
                 break;
         }
-
         return carColorChar;
-
     }
 
     public static void report(char carColorChar, boolean ignition, int x, int y) {
@@ -144,9 +143,9 @@ public class balogh_lab4 {
         }
     }
 
-    public static int randPosition(){
+    public static int randPosition() {
         /* Generates a random integer value from 1-20. */
-        return ((int)(Math.random() * 20.00)) + 1;
+        return ((int) (Math.random() * 20.00)) + 1;
     }
 
     public static boolean toggleIgnition(boolean currentIgnition) {
@@ -159,7 +158,7 @@ public class balogh_lab4 {
          * will only return a new integer position if the value does not go over the grid dimensions. */
         int newPos = 0;
         if (ignition) {
-            if ( ((x + distanceMove) <= 20 ) && ((x + distanceMove) >= 1 ) ) {
+            if (((x + distanceMove) <= 20) && ((x + distanceMove) >= 1)) {
                 return (x + distanceMove);
             } else {
                 System.out.println("\nTHAT WAS TOO FAR!!! The car remains put.");
@@ -175,7 +174,7 @@ public class balogh_lab4 {
         /* Does the exact same thing as moveHorizontal(). */
         int newPos = 0;
         if (ignition) {
-            if ( ((y + distanceMove) <= 20 ) && ((y + distanceMove) >= 1 ) ) {
+            if (((y + distanceMove) <= 20) && ((y + distanceMove) >= 1)) {
                 return (y + distanceMove);
             } else {
                 System.out.println("\nTHAT WAS TOO FAR!!! The car remains put.");
