@@ -11,7 +11,7 @@ public class balogh_lab4 {
 
         char carColorChar = randomColor();
         Scanner userInput = new Scanner(System.in); // This object used for all user-input
-        int userSelection = 0; // For first-level menu options during while-loop
+        String userSelection = ""; // For first-level menu options during while-loop
         boolean dontExit = true; // Controller for while-loop
         String userDirection = ""; // Used during second-level menu option, nested under "change position"
         int locX = (randPosition()); // Assign initial X value using randPosition()
@@ -29,13 +29,13 @@ public class balogh_lab4 {
 
         while (dontExit) {
             System.out.println("\nSo what do you want to do now?\n1. toggle the ignition on/off\n" + "" +
-                    "2. change the position of the car\n3. quit this program");
-            userSelection = userInput.nextInt(); // Collect selection from user
+                    "2. change the position of the car\nQ. quit this program");
+            userSelection = userInput.next(); // Collect selection from user
 
 
-            if (userSelection == 1) {
+            if (userSelection.equals("1")) {
                 ignition = toggleIgnition(ignition); // Use toggleIgnition() to change swap value
-            } else if (userSelection == 2) {
+            } else if (userSelection.equals("2")) {
                     /* Uses do/while-loop to ensure that user input is one of two acceptable options, else
                      * they will be asked again. */
                 do {
@@ -55,7 +55,7 @@ public class balogh_lab4 {
                     System.out.println("Attempting to move vertically, " + distanceMove + " steps.");
                     locY = moveVertical(locY, distanceMove, ignition); // Method returns new Y value
                 }
-            } else if (userSelection == 3) {
+            } else if (userSelection.equals("Q")) {
                 System.out.println("\nAdios. Here is the car as you left it:"); // Exit message
                 dontExit = false; // Switches controller of while-loop to false
             } else {
