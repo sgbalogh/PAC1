@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * Created by stephen on 10/7/15.
+ * Created by Stephen Balogh on 10/7/15.
  */
 public class car_array {
 
@@ -10,7 +10,7 @@ public class car_array {
         /* Begin declaring variables and setting initial values. */
 
         Scanner userInput = new Scanner(System.in); // This object used for all user-input
-        String userSelection = ""; // For first-level menu options during while-loop
+        String userSelection = "";
         boolean dontExit = true; // Controller for while-loop
         String userDirection = ""; // Used during second-level menu option, nested under "change position"
         int distanceMove = 0;
@@ -25,31 +25,22 @@ public class car_array {
         int locYAr[] = new int[NUM_CARS];
         char colorAr[] = new char[NUM_CARS];
 
-        /*
-        * OK... I swear the purpose of the following array, 'superMap[]', will become clear...
-        * It is for a feature of the program that is not required by the spec though.
-        * */
-        String superMap[] = new String[400];
-        /*
-        * End of weird stuff.
-        * */
-
+        String superMap[] = new String[400]; // This array has nothing to do with the spec... it's for an additional method, so feel free to ignore
 
         int thisLocX = 0;
         int thisLocY = 0;
         boolean thisIgnition = false;
         char thisColor;
 
-
+        /* Initialize arrays with randomized values */
         for (int x = 0; x < NUM_CARS; x++) {
             locXAr[x] = randPosition();
             locYAr[x] = randPosition();
             colorAr[x] = randomColor();
         }
 
-
         /* End of variable declaration and value allocation. */
-        superMap(locXAr, locYAr, superMap, colorAr);
+
         System.out.println("\nA total of " + NUM_CARS + " vehicles are presently being tracked.");
         while (dontExit) {
 
@@ -65,7 +56,7 @@ public class car_array {
                 dontExit = false;
                 System.out.print("Sayonara!!");
             } else {
-
+                /* Retrieve corresponding car data from array and assign to variables */
                 thisLocX = locXAr[selectedCar - 1];
                 thisLocY = locYAr[selectedCar - 1];
                 thisIgnition = ignitionAr[selectedCar - 1];
@@ -73,17 +64,15 @@ public class car_array {
 
                 System.out.println("\nStatus of selected vehicle (" + selectedCar + " of " + NUM_CARS + "):");
 
-                report(thisColor, thisIgnition, thisLocX, thisLocY); // Generate initial report
+                report(thisColor, thisIgnition, thisLocX, thisLocY); // Generate report for selected vehicle
 
         /* Begin while-loop, will allow user to change position, ignition unlimited number
          * of times until they EXIT program by passing in option '3' at the main menu. */
-
 
                 System.out.println("\nSo what do you want to do with vehicle " + selectedCar + "?\n1. toggle the ignition on/off\n" + "" +
                         "2. change the position of the car\n3. choose a different car\n4. produce status reports and maps for all " +
                         NUM_CARS + " vehicles\n5. create \"super map\" of all vehicles displayed on one map\nQ. quit this program");
                 userSelection = userInput.next(); // Collect selection from user
-
 
                 if (userSelection.equals("1")) {
                     thisIgnition = toggleIgnition(thisIgnition); // Use toggleIgnition() to change swap value
@@ -111,16 +100,16 @@ public class car_array {
                         locYAr[selectedCar - 1] = thisLocY; // Save new value returned from method back to array
                     }
                 } else if (userSelection.equals("3")) {
-                    System.out.println("Ok.");
+                    System.out.println("Ok."); // Exits back to car selection menu
 
                 } else if (userSelection.equals("4")) {
-                    for (int x = 0; x < NUM_CARS; x++) {
+                    for (int x = 0; x < NUM_CARS; x++) { // Makes maps for each vehicle
                         System.out.println("\nVehicle " + (x + 1) + " (of " + NUM_CARS + ")");
                         report(colorAr[x], ignitionAr[x], locXAr[x], locYAr[x]);
                     }
                     System.out.println("Finished.");
                 } else if (userSelection.equals("5")) {
-                    superMap(locXAr, locYAr, superMap, colorAr);
+                    superMap(locXAr, locYAr, superMap, colorAr); // Produces a map that displays all 10 vehicles simultaneously
                 } else if (userSelection.equals("Q")) {
                     System.out.println("\nAdios. Here is vehicle " + selectedCar + " as you left it:"); // Exit message
                     dontExit = false; // Switches controller of while-loop to false
@@ -222,7 +211,7 @@ public class car_array {
     }
 
     public static void superMap(int[] x, int[] y, String[] map, char[] color) {
-          /* THIS IS AN EXPERIMENT */
+          /* This method is an addition, and not required in the spec */
         for (int i = 0; i < 400; i++) { // Initialize superMap array with "- " indexes
             map[i] = "- ";
         }
