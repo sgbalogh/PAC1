@@ -3,7 +3,7 @@
  */
 public class SmallInt {
 
-    public static final int MAXVALUE = 1000;
+    public static final int MAXVALUE = 1000000;
     private int value;
 
     SmallInt(int x) {
@@ -11,7 +11,7 @@ public class SmallInt {
     }
 
     public void setDec(int y) {
-        if ((y >= 0) && (y <= 1000)) {
+        if ((y >= 0) && (y <= MAXVALUE)) {
             this.value = y;
         } else {
             this.value = 0;
