@@ -1,5 +1,7 @@
 /**
- * Created by stephen on 10/29/15.
+ * Created by Stephen Balogh on 10/29/15
+   PAC 1, NYU Department of Computer Science
+   Professor Evan Korth
  */
 import java.util.Scanner;
 public class TestSmallInt {
