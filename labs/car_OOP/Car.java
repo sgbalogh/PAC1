@@ -1,5 +1,7 @@
 /**
- * Created by stephen on 11/8/15.
+ * Stephen Balogh, 11/8/2015
+ * PAC 1, New York University
+ * Professor Evan Korth
  */
 public class Car {
 
@@ -121,4 +123,29 @@ public class Car {
 
     }
 
+    public static void superMap(Car[] carArray) {
+
+        String[] superMap = new String[400];
+        for (int i = 0; i < 400; i++) { // Initialize superMap array with "- " indexes
+            superMap[i] = "- ";
+        }
+        for (int i = 0; i < carArray.length; i++) {
+            int longX = ((carArray[i].getPosX() + ((carArray[i].getPosY() * 20) - 20)) - 1);
+
+            if (superMap[longX].equals("- ")) {
+                superMap[longX] = carArray[i].getColor() + " ";
+            } else {
+                superMap[longX] = "* ";
+            }
+        }
+
+        System.out.println("\n\"Super Map\" of all vehicles\nCollisions (two or more vehicles with same position) marked with \'*\'");
+
+        for (int i = 0; i < 400; i++) {
+            System.out.print(superMap[i]);
+            if (((i + 1) % 20) == 0) {
+                System.out.print("\n");
+            }
+        }
+    }
 }

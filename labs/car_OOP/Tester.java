@@ -1,9 +1,10 @@
 /**
- * Created by stephen on 11/8/15.
+ * Stephen Balogh, 11/8/2015
+ * PAC 1, New York University
+ * Professor Evan Korth
  */
 
 import java.util.Scanner;
-
 public class Tester {
     public static void main(String[] args) {
 
@@ -20,6 +21,8 @@ public class Tester {
         for (int i = 0; i < myCars.length; i++) {
             myCars[i] = new Car();
         }
+
+        // Begin menu
         while (dontExit) {
             do {
                 System.out.println("Which vehicle do you want to inspect or modify?\n\nPlease select a vehicle by " +
@@ -27,18 +30,13 @@ public class Tester {
 
                 selectedCar = userInput.nextInt();
             }
-            while (!((0 <= selectedCar) && (selectedCar <= myCars.length))); // Make sure that user inputs a valid car number or 0 for exit
+            while (!((0 <= selectedCar) && (selectedCar <= myCars.length))); // Makes sure that user inputs a valid car number or 0 for exit
 
             if (selectedCar == 0) {
                 dontExit = false;
                 System.out.print("Sayonara!!");
             } else {
-                /* Retrieve corresponding car data from array and assign to variables */
-
                 System.out.println("Car " + selectedCar + ":\n" + myCars[selectedCar - 1].toString());
-
-        /* Begin while-loop, will allow user to change position, ignition unlimited number
-         * of times until they EXIT program by passing in option '3' at the main menu. */
 
                 System.out.println("\nSo what do you want to do with vehicle " + selectedCar + "?\n1. toggle the ignition on/off\n" + "" +
                         "2. change the position of the car\n3. choose a different car\n4. produce status reports and maps for all " +
@@ -69,7 +67,6 @@ public class Tester {
                     }
                 } else if (userSelection.equals("3")) {
                     System.out.println("Ok."); // Exits back to car selection menu
-
                 } else if (userSelection.equals("4")) {
                     for (int x = 1; x <= myCars.length; x++) { // Makes maps for each vehicle
                         System.out.println("\nVehicle " + x + " (of " + myCars.length + ")");
@@ -77,7 +74,7 @@ public class Tester {
                     }
                     System.out.println("Finished.");
                 } else if (userSelection.equals("5")) {
-                    System.out.println("Can't do that quite yet buddy...");
+                    Car.superMap(myCars);
                 } else if (userSelection.equals("Q")) {
                     System.out.println("\nAdios. Here is vehicle " + selectedCar + " as you left it:"); // Exit message
                     dontExit = false; // Switches controller of while-loop to false
@@ -86,7 +83,7 @@ public class Tester {
                 }
 
                 System.out.println("\nStatus of selected vehicle (" + selectedCar + " of " + myCars.length + ")");
-                myCars[selectedCar - 1].toString();
+                System.out.println(myCars[selectedCar - 1].toString());
             }
         }
     }
