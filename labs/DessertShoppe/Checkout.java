@@ -51,6 +51,16 @@ public class Checkout {
     return numberOfItems;
   }
 
+  public String toString() {
+    String receipt = "";
+    for (int i = 0; i < dessertArray.length; i++) {
+      if (dessertArray[i] != null) {
+        receipt += dessertArray[i].getName() + "\n";
+      }
+    }
+    return receipt;
+  }
+
 
 
 
