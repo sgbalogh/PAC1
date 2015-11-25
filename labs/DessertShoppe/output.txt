@@ -1,0 +1,42 @@
+
+Number of items: 4
+
+
+Total cost: 1331
+
+
+Total tax: 87
+
+
+Cost + Tax: 1418
+
+2.25lbs. @ 3.99 /lb.
+Peanut Butter Fudge      8.98
+Vanilla Ice Cream        1.05
+Hot Fudge Sundae with
+Choc. Chip Ice Cream       1.95
+Oatmeal Raisin Cookies   1.33
+
+
+Number of items: 6
+
+
+Total cost: 1192
+
+
+Total tax: 77
+
+
+Cost + Tax: 1269
+
+Strawberry Ice Cream     1.45
+Caramel Sundae with
+Vanilla Ice Cream          1.55
+1.33lbs. @ .89 /lb.
+Gummy Worms              1.18
+Chocolate Chip Cookies   1.33
+1.5lbs. @ 2.09 /lb.
+Salt Water Taffy         3.14
+3.0lbs. @ 1.09 /lb.
+Candy Corn               3.27
+

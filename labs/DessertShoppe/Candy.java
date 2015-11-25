@@ -23,6 +23,9 @@ public class Candy extends DessertItem {
     for (int x = 0; x < (DessertShoppe.MAX_ITEM_NAME_SIZE - this.getName().length()); x++) {
       line += " ";
     }
+    for (int y = 0; y < (DessertShoppe.COST_WIDTH - DessertShoppe.cents2dollarsAndCents(getCost()).length()); y++) {
+      line += " ";
+    }
     line += DessertShoppe.cents2dollarsAndCents(getCost());
     line = this.weight + "lbs. @ " + DessertShoppe.cents2dollarsAndCents((int)this.pricepound) + " /lb.\n" + line;
     return line;
