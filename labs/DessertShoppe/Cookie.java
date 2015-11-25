@@ -27,6 +27,7 @@ private int pricedozen;
       line += " ";
     }
     line += DessertShoppe.cents2dollarsAndCents(getCost());
+    line = this.count + " @ " + DessertShoppe.cents2dollarsAndCents((int)this.pricedozen) + " /dz.\n" + line;
     return line;
   }
 

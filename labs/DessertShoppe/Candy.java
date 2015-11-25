@@ -27,7 +27,7 @@ public class Candy extends DessertItem {
       line += " ";
     }
     line += DessertShoppe.cents2dollarsAndCents(getCost());
-    line = this.weight + "lbs. @ " + DessertShoppe.cents2dollarsAndCents((int)this.pricepound) + " /lb.\n" + line;
+    line = this.weight + " lbs. @ " + DessertShoppe.cents2dollarsAndCents((int)this.pricepound) + " /lb.\n" + line;
     return line;
   }
 
