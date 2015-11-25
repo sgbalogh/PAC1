@@ -2,9 +2,9 @@
  * Abstract superclass for Dessert Item hierarchy
  */
 public abstract class DessertItem {
-  
+
   protected String name;
-  
+
 public DessertItem() {
     this("");
   }
@@ -12,7 +12,7 @@ public DessertItem() {
   public DessertItem(String name) {
     if (name.length() <= DessertShoppe.MAX_ITEM_NAME_SIZE)
       this.name = name;
-    else 
+    else
       this.name = name.substring(0,DessertShoppe.MAX_ITEM_NAME_SIZE);
   }
 
@@ -22,9 +22,6 @@ public DessertItem() {
 
   public abstract int getCost();
 
+  public abstract String getReceiptEntry();
+
 }
-   
-  
-  
-   
-   

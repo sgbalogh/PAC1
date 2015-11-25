@@ -55,7 +55,7 @@ public class Checkout {
     String receipt = "";
     for (int i = 0; i < dessertArray.length; i++) {
       if (dessertArray[i] != null) {
-        receipt += dessertArray[i].getName() + "\n";
+        receipt += dessertArray[i].getReceiptEntry() + "\n";
       }
     }
     return receipt;
