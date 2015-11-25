@@ -15,24 +15,12 @@ public class Checkout {
   }
 
   public int totalTax() {
-    // double subtotal = 0;
-    // double totalTax = 0;
-    // for (int i = 0; i < numberOfItems; i++) {
-    //   subtotal += this.dessertArray[i].getCost();
-    // }
-    // totalTax = ((DessertShoppe.TAX_RATE / 100.0) * subtotal);
-    // double rounder = (totalTax - (int)totalTax);
-    // if (rounder >= .5) {
-    //   totalTax++;
-    // }
-    // return (int)totalTax;
     double tax = this.totalCost() * (DessertShoppe.TAX_RATE / 100.00);
     double rounder = (tax - (int)tax);
     if (rounder >= .5) {
       tax++;
     }
     return (int)tax;
-
   }
 
   public int totalCost() {
@@ -57,7 +45,6 @@ public class Checkout {
     String totalCost = "";
     int spacer = DessertShoppe.MAX_ITEM_NAME_SIZE - DessertShoppe.STORE_NAME.length();
 
-
     for (int t = 0; t < spacer; t++) {
       receipt += " ";
     }
@@ -68,6 +55,7 @@ public class Checkout {
         receipt += " ";
       }
     }
+
     for (int y = 0; y < DessertShoppe.STORE_NAME.length(); y++) {
       receipt += "-";
     }
@@ -80,23 +68,28 @@ public class Checkout {
     }
 
     receipt += "\nTax";
+
     for (int x = 0; x < DessertShoppe.MAX_ITEM_NAME_SIZE - 3; x++){
       receipt += " ";
     }
+
     totalTax = DessertShoppe.cents2dollarsAndCents(totalTax());
+
     for (int y = 0; y < DessertShoppe.COST_WIDTH - totalTax.length(); y++) {
       receipt += " ";
     }
-    receipt += totalTax;
 
-    receipt += "\nTotal Cost";
+    receipt += totalTax + "\nTotal Cost";
+
     for (int x = 0; x < DessertShoppe.MAX_ITEM_NAME_SIZE - 10; x++){
       receipt += " ";
     }
+
     totalCost = DessertShoppe.cents2dollarsAndCents(totalTax() + totalCost());
     for (int y = 0; y < DessertShoppe.COST_WIDTH - totalCost.length(); y++) {
       receipt += " ";
     }
+    
     receipt += totalCost;
 
     return receipt;
