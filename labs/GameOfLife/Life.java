@@ -5,9 +5,25 @@ public class Life {
 
     private final static int M = 25;
     private final static int N = 75;
-    private static char[][] oldMatrix;
-    private static char[][] currentMatrix;
+    private char[][] oldMatrix;
+    private char[][] currentMatrix;
 
+    public Life() {
+        Double randomizer;
+        oldMatrix = new char[M + 2][N + 2];
+        currentMatrix = new char[M + 2][N + 2];
+        for (int i = 0; i < currentMatrix.length; i++) {
+            for (int j = 0; j < currentMatrix[i].length; j++) {
+                randomizer = Math.random();
+                if (randomizer >= 0.7) {
+                    currentMatrix[i][j] = 'X';
+                } else {
+                    currentMatrix[i][j] = '.';
+                }
+            }
+        }
+
+    }
     public Life(String filename) {
         oldMatrix = new char[M + 2][N + 2];
         currentMatrix = new char[M + 2][N + 2];
@@ -28,7 +44,7 @@ public class Life {
     }
 
 
-    public static void printCurrent() {
+    public void printCurrent() {
         for (int i = 0; i < currentMatrix.length; i++) {
             System.out.print(i + ": ");
             if (i < 10) {
@@ -64,7 +80,7 @@ public class Life {
         return true;
     }
 
-    public static void nextGen() {
+    public void nextGen() {
         // Push current into oldMatrix
         oldMatrix = currentMatrix;
         currentMatrix = new char[M + 2][N + 2];

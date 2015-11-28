@@ -4,10 +4,10 @@
 public class PlayLife {
 
     public static void main(String[] args) {
-        Life myLife = new Life("/Users/stephen/IdeaProjects/GameOfLife/src/life5.dat");
+        Life myLife = new Life();
         myLife.printCurrent();
 
-        for (int i = 1; i < 100; i++) {
+        for (int i = 1; i < 1000; i++) {
             System.out.println("\nGeneration " + i);
             myLife.nextGen();
             try {
