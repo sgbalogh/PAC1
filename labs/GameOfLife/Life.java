@@ -1,5 +1,7 @@
 /**
- * Created by stephen on 11/27/15.
+ * Created by Stephen Balogh on 11/27/15.
+ * PAC 1, Professor Evan Korth
+ * New York University
  */
 public class Life {
 
@@ -17,27 +19,21 @@ public class Life {
         for (int i = 0; i < currentMatrix.length; i++) {
             for (int j = 0; j < currentMatrix[i].length; j++) {
                 randomizer = Math.random();
-                if (randomizer >= 0.8) {
+                if (randomizer >= 0.85) {
                     currentMatrix[i][j] = 'X';
                 } else {
                     currentMatrix[i][j] = '.';
                 }
             }
         }
-
     }
+
     public Life(String filename) { // Constructor that reads an initial state
         oldMatrix = new char[M + 2][N + 2];
         currentMatrix = new char[M + 2][N + 2];
         generationCount = 1; // First generation
         String lineReader;
         FileStringReader myFile = new FileStringReader(filename);
-        // Initialize current matrix with '.'
-        for (int i = 0; i < currentMatrix.length; i++) {
-            for (int j = 0; j < currentMatrix[i].length; j++) {
-                currentMatrix[i][j] = '.';
-            }
-        }
         for (int mc = 0; mc < M; mc++) {
             lineReader = (myFile.readLine());
             for (int nc = 0; nc < N; nc++) {
@@ -46,14 +42,13 @@ public class Life {
         }
     }
 
-
     public void printCurrent() {
-        for (int i = 0; i < currentMatrix.length; i++) {
+        for (int i = 1; i < currentMatrix.length - 1; i++) {
             System.out.print(i + ": ");
             if (i < 10) {
                 System.out.print(" ");
             }
-            for (int j = 0; j < currentMatrix[i].length; j++) {
+            for (int j = 1; j < currentMatrix[i].length - 1; j++) {
                 System.out.print(currentMatrix[i][j] + "");
             }
             System.out.print("\n");
@@ -62,7 +57,6 @@ public class Life {
 
     public int countNeighbors(char[][] world, int iM, int iN) {
         int neighborCount = 0;
-
         for (int a = iN - 1; a <= iN + 1; a++) {
             if (world[iM - 1][a] == 'X') {
                 neighborCount++;
@@ -70,7 +64,6 @@ public class Life {
         }
         if (world[iM][iN - 1] == 'X') { neighborCount++; }
         if (world[iM][iN + 1] == 'X') { neighborCount++; }
-
         for (int c = iN - 1; c <= iN + 1; c++) {
             if (world[iM + 1][c] == 'X') {
                 neighborCount++;
@@ -83,16 +76,13 @@ public class Life {
         // Push current into oldMatrix
         oldMatrix = currentMatrix;
         currentMatrix = new char[M + 2][N + 2];
-
         this.generationCount++;
-
         // Initialize new currentMatrix
         for (int i = 0; i < currentMatrix.length; i++) {
             for (int j = 0; j < currentMatrix[i].length; j++) {
                 currentMatrix[i][j] = '.';
             }
         }
-
         for (int aM = 1; aM <= M; aM++) {
             for (int aN = 1; aN <= N; aN++) {
                 if (oldMatrix[aM][aN] == 'X') { // If alive
@@ -149,6 +139,4 @@ public class Life {
     public int getGeneration() {
         return this.generationCount;
     }
-
-
 }
