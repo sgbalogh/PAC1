@@ -3,6 +3,8 @@
  * PAC 1, Professor Evan Korth
  * New York University
  */
+import java.util.Scanner;
+import java.io.File;
 public class Life {
 
     private final static int M = 25;
@@ -29,13 +31,23 @@ public class Life {
     }
 
     public Life(String filename) { // Constructor that reads an initial state
+        File initialState = new File(filename);
+        Scanner initialStateReader = null;
+        String lineReader;
         oldMatrix = new char[M + 2][N + 2];
         currentMatrix = new char[M + 2][N + 2];
         generationCount = 1; // First generation
-        String lineReader;
-        FileStringReader myFile = new FileStringReader(filename);
-        for (int mc = 0; mc < M; mc++) {
-            lineReader = (myFile.readLine());
+        try
+        {
+            initialStateReader = new Scanner(initialState);
+        }
+        catch (Exception e)
+        {
+            System.out.print("File " + initialState + " does not exist");
+            System.exit(0);
+        }
+        for (int mc = 0; mc < M; mc++) { // Iterate across number of rows/lines
+            lineReader = (initialStateReader.nextLine());
             for (int nc = 0; nc < N; nc++) {
                 currentMatrix[mc + 1][nc + 1] = lineReader.charAt(nc);
             }
