@@ -1,12 +1,13 @@
 /**
- * Created by sgb334 on 12/4/15.
+ * Created by Stephen Balogh on 12/4/15.
+ * PAC 1, Professor Evan Korth
+ * New York University
  */
 public class Stack {
 
     private String[] arrayStack;
-    private int top = -1;
+    private int top;
     private int arraySize;
-
 
     public Stack() {
         this(10);
@@ -15,6 +16,7 @@ public class Stack {
     public Stack(int size) {
         this.arrayStack = new String[size];
         this.arraySize = arrayStack.length;
+        top = -1;
     }
 
     public String pop() {
@@ -43,7 +45,19 @@ public class Stack {
         }
     }
 
+    public void clear() {
+        this.top = -1;
+    }
+
     public int getTop() {
         return this.top;
+    }
+
+    public String getValueAtTop() {
+        if (this.top > -1) {
+            return this.arrayStack[top];
+        } else {
+            return "EMPTY";
+        }
     }
 }
