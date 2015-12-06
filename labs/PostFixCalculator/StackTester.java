@@ -3,17 +3,35 @@
  * PAC 1, Professor Evan Korth
  * New York University
  */
+import java.util.Scanner;
 public class StackTester {
     public static void main(String[] args) {
 
         PostFixCalculator myCalc = new PostFixCalculator();
+        boolean dontExit = true;
+        Scanner userInput = new Scanner(System.in);
+        String menuSelection;
+        String inputExpression;
 
-        myCalc.PostFixStringCalc("4 8 +");
-        System.out.println(myCalc.getCurrentValue());
+        System.out.println("Calculator");
+        while (dontExit) {
+            System.out.println("\nSelect your input type (or any other key for exit):\na) Postfix expression\nb) infix expression");
+            menuSelection = userInput.nextLine();
 
-        myCalc.InFixStringCalc("(4+8)*(6-5)/((3-2)*(2+2))");
-        System.out.println(myCalc.getCurrentValue());
+            if (menuSelection.equals("a") || menuSelection.equals("A")) {
+                System.out.println("Please enter your postfix expression:");
+                myCalc.PostFixStringCalc(userInput.nextLine());
+                System.out.println("Ans: " + myCalc.getCurrentValue());
+            } else if (menuSelection.equals("b") || menuSelection.equals("B")) {
+                System.out.println("Please enter your infix expression:");
+                inputExpression = userInput.nextLine();
+                myCalc.InFixStringCalc(inputExpression);
+                System.out.println("As postfix: " + myCalc.InFixToPostFix(inputExpression));
+                System.out.println("Ans: " + myCalc.getCurrentValue());
+            } else {
+                dontExit = false;
+            }
 
-
+        }
     }
 }

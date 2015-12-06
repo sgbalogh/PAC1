@@ -15,8 +15,7 @@ public class PostFixCalculator {
 
     public void InFixStringCalc(String input) {
         this.inStringtoPostString = new Converter();
-        String converted = this.inStringtoPostString.toPostFix(input);
-        PostFixStringCalc(converted);
+        PostFixStringCalc(this.inStringtoPostString.toPostFix(input));
     }
 
     public void PostFixStringCalc(String input) {
@@ -26,6 +25,12 @@ public class PostFixCalculator {
         for (int i = 0; i < discreteInputs.length; i++) {
             this.insert(discreteInputs[i]);
         }
+    }
+
+    // Used so that the client program can see infix to postfix conversion without instantiating the Converter class
+    public String InFixToPostFix(String input) {
+        return inStringtoPostString.toPostFix(input).replaceAll("\\s+"," ");
+
     }
 
     public void insert(String input) {
