@@ -121,7 +121,7 @@ class Converter {
 
     public void tokenize(String input) {
 
-        this.tokenizer = new StringTokenizer(input, "+-/()*^ ", true);
+        this.tokenizer = new StringTokenizer(input, "+-/()*^", true);
         this.tokenCount = tokenizer.countTokens();
         this.tokenList = new String[tokenCount];
         for (int i = 0; i < tokenCount; i++) {
@@ -164,9 +164,15 @@ class Converter {
                     this.operatorStack.push("/");
                     break;
                 case "+":
+                    while (!(this.isLastOnStackLower("+"))) {
+                        this.PostFixResult += this.operatorStack.pop() + " ";
+                    }
                     this.operatorStack.push("+");
                     break;
                 case "-":
+                    while (!(this.isLastOnStackLower("-"))) {
+                        this.PostFixResult += this.operatorStack.pop() + " ";
+                    }
                     this.operatorStack.push("-");
                     break;
                 default:
@@ -175,7 +181,7 @@ class Converter {
             }
         }
         while (!(this.operatorStack.top().equals("EMPTY"))) {
-            this.PostFixResult += this.operatorStack.pop();
+            this.PostFixResult += " " + this.operatorStack.pop();
         }
         return this.PostFixResult;
     }
@@ -200,6 +206,20 @@ class Converter {
                 break;
             case "^":
                 if (lastOperand.equals("+") || lastOperand.equals("-") || lastOperand.equals("(") || lastOperand.equals("EMPTY")) {
+                    condition = true;
+                } else {
+                    condition = false;
+                }
+                break;
+            case "+":
+                if (lastOperand.equals("EMPTY")) {
+                    condition = true;
+                } else {
+                    condition = false;
+                }
+                break;
+            case "-":
+                if (lastOperand.equals("EMPTY")) {
                     condition = true;
                 } else {
                     condition = false;
