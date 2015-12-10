@@ -3,10 +3,11 @@
  * PAC 1, Professor Evan Korth
  * New York University
  */
+
 public class Stack {
 
     private String[] arrayStack;
-    private int top;
+    private int topIndex;
     private int arraySize;
 
     public Stack() {
@@ -16,23 +17,23 @@ public class Stack {
     public Stack(int size) {
         this.arrayStack = new String[size];
         this.arraySize = arrayStack.length;
-        top = -1;
+        topIndex = -1;
     }
 
     public String pop() {
-        if (top >= 0) {
-            this.top--;
-            return arrayStack[top + 1];
+        if (topIndex >= 0) {
+            this.topIndex--;
+            return arrayStack[topIndex + 1];
         } else {
-            return "Array is empty.";
+            return "Stack is empty.";
         }
     }
 
     public void push(String pushed) {
         String[] biggerArrayStack;
-        if (top < (arraySize - 1)) {
-            this.top++;
-            this.arrayStack[top] = pushed;
+        if (topIndex < (arraySize - 1)) {
+            this.topIndex++;
+            this.arrayStack[topIndex] = pushed;
         } else {
             biggerArrayStack = new String[arraySize + 5];
             for (int i = 0; i < arraySize; i++) {
@@ -40,22 +41,22 @@ public class Stack {
             }
             this.arrayStack = biggerArrayStack;
             this.arraySize = arrayStack.length;
-            this.top++;
-            this.arrayStack[top] = pushed;
+            this.topIndex++;
+            this.arrayStack[topIndex] = pushed;
         }
     }
 
     public void clear() {
-        this.top = -1;
+        this.topIndex = -1;
     }
 
-    public int getTop() {
-        return this.top;
+    public int getTopIndex() {
+        return this.topIndex;
     }
 
-    public String getValueAtTop() {
-        if (this.top > -1) {
-            return this.arrayStack[top];
+    public String top() {
+        if (this.topIndex > -1) {
+            return this.arrayStack[topIndex];
         } else {
             return "EMPTY";
         }

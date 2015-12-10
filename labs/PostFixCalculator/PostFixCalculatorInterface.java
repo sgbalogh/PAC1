@@ -4,7 +4,7 @@
  * New York University
  */
 import java.util.Scanner;
-public class StackTester {
+public class PostFixCalculatorInterface {
     public static void main(String[] args) {
 
         PostFixCalculator myCalc = new PostFixCalculator();
@@ -15,7 +15,7 @@ public class StackTester {
 
         System.out.println("Calculator");
         while (dontExit) {
-            System.out.println("\nSelect your input type (or any other key for exit):\na) Postfix expression\nb) infix expression");
+            System.out.println("\nSelect your input type (or any other key to exit):\na) Postfix expression\nb) infix expression");
             menuSelection = userInput.nextLine();
 
             if (menuSelection.equals("a") || menuSelection.equals("A")) {
@@ -30,8 +30,8 @@ public class StackTester {
                 System.out.println("Ans: " + myCalc.getCurrentValue());
             } else {
                 dontExit = false;
+                System.out.println("Bye!");
             }
-
         }
     }
 }

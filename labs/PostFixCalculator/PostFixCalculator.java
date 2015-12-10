@@ -3,19 +3,20 @@
  * PAC 1, Professor Evan Korth
  * New York University
  */
+
 import java.util.StringTokenizer;
 
 public class PostFixCalculator {
 
     private Stack calcStack;
-    private Converter inStringtoPostString;
+    private Converter inStringToPostString;
 
     public PostFixCalculator() {
     }
 
     public void InFixStringCalc(String input) {
-        this.inStringtoPostString = new Converter();
-        PostFixStringCalc(this.inStringtoPostString.toPostFix(input));
+        this.inStringToPostString = new Converter();
+        PostFixStringCalc(this.inStringToPostString.toPostFix(input));
     }
 
     public void PostFixStringCalc(String input) {
@@ -29,7 +30,7 @@ public class PostFixCalculator {
 
     // Used so that the client program can see infix to postfix conversion without instantiating the Converter class
     public String InFixToPostFix(String input) {
-        return inStringtoPostString.toPostFix(input).replaceAll("\\s+"," ");
+        return inStringToPostString.toPostFix(input).replaceAll("\\s+", " ");
 
     }
 
@@ -41,39 +42,59 @@ public class PostFixCalculator {
 
         switch (input) {
             case "+":
-                Op2 = Double.parseDouble(this.calcStack.pop());
-                Op1 = Double.parseDouble(this.calcStack.pop());
-                product = Op1 + Op2;
-                pushBack = "" + product;
-                this.calcStack.push(pushBack);
+                try {
+                    Op2 = Double.parseDouble(this.calcStack.pop());
+                    Op1 = Double.parseDouble(this.calcStack.pop());
+                    product = Op1 + Op2;
+                    pushBack = "" + product;
+                    this.calcStack.push(pushBack);
+                } catch (NumberFormatException ex) {
+                    System.out.println("Unable to properly parse number. Only enter numbers, operators, or parentheses.");
+                }
                 break;
             case "-":
-                Op2 = Double.parseDouble(this.calcStack.pop());
-                Op1 = Double.parseDouble(this.calcStack.pop());
-                product = Op1 - Op2;
-                pushBack = "" + product;
-                this.calcStack.push(pushBack);
+                try {
+                    Op2 = Double.parseDouble(this.calcStack.pop());
+                    Op1 = Double.parseDouble(this.calcStack.pop());
+                    product = Op1 - Op2;
+                    pushBack = "" + product;
+                    this.calcStack.push(pushBack);
+                } catch (NumberFormatException ex) {
+                    System.out.println("Unable to properly parse number. Only enter numbers, operators, or parentheses.");
+                }
                 break;
             case "*":
-                Op2 = Double.parseDouble(this.calcStack.pop());
-                Op1 = Double.parseDouble(this.calcStack.pop());
-                product = Op1 * Op2;
-                pushBack = "" + product;
-                this.calcStack.push(pushBack);
+                try {
+                    Op2 = Double.parseDouble(this.calcStack.pop());
+                    Op1 = Double.parseDouble(this.calcStack.pop());
+                    product = Op1 * Op2;
+                    pushBack = "" + product;
+                    this.calcStack.push(pushBack);
+                } catch (NumberFormatException ex) {
+                    System.out.println("Unable to properly parse number. Only enter numbers, operators, or parentheses.");
+                }
                 break;
             case "/":
-                Op2 = Double.parseDouble(this.calcStack.pop());
-                Op1 = Double.parseDouble(this.calcStack.pop());
-                product = Op1 / Op2;
-                pushBack = "" + product;
-                this.calcStack.push(pushBack);
+                try {
+                    Op2 = Double.parseDouble(this.calcStack.pop());
+                    Op1 = Double.parseDouble(this.calcStack.pop());
+                    product = Op1 / Op2;
+                    pushBack = "" + product;
+                    this.calcStack.push(pushBack);
+                } catch (NumberFormatException ex) {
+                    System.out.println("Unable to properly parse number. Only enter numbers, operators, or parentheses.");
+                }
                 break;
             case "^":
-                Op2 = Double.parseDouble(this.calcStack.pop());
-                Op1 = Double.parseDouble(this.calcStack.pop());
-                product = Math.pow(Op1, Op2);
-                pushBack = "" + product;
-                this.calcStack.push(pushBack);
+                try {
+                    Op2 = Double.parseDouble(this.calcStack.pop());
+                    Op1 = Double.parseDouble(this.calcStack.pop());
+                    product = Math.pow(Op1, Op2);
+                    pushBack = "" + product;
+                    this.calcStack.push(pushBack);
+                } catch (NumberFormatException ex) {
+                    System.out.println("Unable to properly parse number. Only enter numbers, operators, or parentheses.");
+                }
                 break;
             default:
                 this.calcStack.push(input);
@@ -82,7 +103,12 @@ public class PostFixCalculator {
     }
 
     public double getCurrentValue() {
-        return Double.parseDouble(calcStack.getValueAtTop());
+        try {
+            return Double.parseDouble(calcStack.top());
+        } catch (NumberFormatException ex) {
+            System.out.println("Something went wrong; most likely something other than an operator or operand has been inserted. Answer set to 0.0.");
+            return 0.0;
+        }
     }
 }
 
@@ -95,8 +121,6 @@ class Converter {
 
     public void tokenize(String input) {
 
-        // This should also clean spaces out of the String, leaving only operators and operands
-
         this.tokenizer = new StringTokenizer(input, "+-/()*^ ", true);
         this.tokenCount = tokenizer.countTokens();
         this.tokenList = new String[tokenCount];
@@ -108,7 +132,6 @@ class Converter {
     public String toPostFix(String input) {
         this.PostFixResult = "";
         this.operatorStack = new Stack();
-
         this.tokenize(input);
 
         for (int i = 0; i < this.tokenList.length; i++) {
@@ -117,7 +140,7 @@ class Converter {
                     operatorStack.push(this.tokenList[i]);
                     break;
                 case ")":
-                    while (!(operatorStack.getValueAtTop().equals("("))) {
+                    while (!(operatorStack.top().equals("("))) {
                         this.PostFixResult += this.operatorStack.pop() + " ";
                     }
                     this.operatorStack.pop(); // One last time to remove "("
@@ -151,14 +174,14 @@ class Converter {
                     break;
             }
         }
-        while (!(this.operatorStack.getValueAtTop().equals("EMPTY"))) {
+        while (!(this.operatorStack.top().equals("EMPTY"))) {
             this.PostFixResult += this.operatorStack.pop();
         }
         return this.PostFixResult;
     }
 
     private boolean isLastOnStackLower(String currentOperand) {
-        String lastOperand = operatorStack.getValueAtTop();
+        String lastOperand = operatorStack.top();
         boolean condition;
         switch (currentOperand) {
             case "*":
