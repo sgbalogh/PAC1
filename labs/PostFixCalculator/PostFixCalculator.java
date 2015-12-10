@@ -4,6 +4,7 @@
  * New York University
  */
 
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class PostFixCalculator {
@@ -110,6 +111,35 @@ public class PostFixCalculator {
             return 0.0;
         }
     }
+
+    public static void main(String[] args) { // Calculator interface
+        PostFixCalculator myCalc = new PostFixCalculator();
+        boolean dontExit = true;
+        Scanner userInput = new Scanner(System.in);
+        String menuSelection;
+        String inputExpression;
+
+        System.out.println("Calculator");
+        while (dontExit) {
+            System.out.println("\nSelect your input type (or any other key to exit):\na) Postfix expression\nb) infix expression");
+            menuSelection = userInput.nextLine();
+
+            if (menuSelection.equals("a") || menuSelection.equals("A")) {
+                System.out.println("Please enter your postfix expression:");
+                myCalc.PostFixStringCalc(userInput.nextLine());
+                System.out.println("Ans: " + myCalc.getCurrentValue());
+            } else if (menuSelection.equals("b") || menuSelection.equals("B")) {
+                System.out.println("Please enter your infix expression:");
+                inputExpression = userInput.nextLine();
+                myCalc.InFixStringCalc(inputExpression);
+                System.out.println("As postfix: " + myCalc.InFixToPostFix(inputExpression));
+                System.out.println("Ans: " + myCalc.getCurrentValue());
+            } else {
+                dontExit = false;
+                System.out.println("Bye!");
+            }
+        }
+    }
 }
 
 class Converter {
@@ -212,14 +242,14 @@ class Converter {
                 }
                 break;
             case "+":
-                if (lastOperand.equals("EMPTY")) {
+                if (lastOperand.equals("(") || lastOperand.equals("EMPTY")) {
                     condition = true;
                 } else {
                     condition = false;
                 }
                 break;
             case "-":
-                if (lastOperand.equals("EMPTY")) {
+                if (lastOperand.equals("(") || lastOperand.equals("EMPTY")) {
                     condition = true;
                 } else {
                     condition = false;
