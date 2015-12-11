@@ -4,7 +4,7 @@
  * New York University
  */
 
-public class Stack {
+public class Stack implements UnboundedStackInterface<String> {
 
     private String[] arrayStack;
     private int topIndex;
@@ -20,12 +20,11 @@ public class Stack {
         topIndex = -1;
     }
 
-    public String pop() {
-        if (topIndex >= 0) {
+    public void pop() {
+        if (!isEmpty()) {
             this.topIndex--;
-            return arrayStack[topIndex + 1];
         } else {
-            return "Stack is empty.";
+            throw new StackUnderflowException("Pop attempted on an empty stack.");
         }
     }
 
@@ -48,6 +47,14 @@ public class Stack {
 
     public void clear() {
         this.topIndex = -1;
+    }
+
+    public boolean isEmpty() {
+        if (this.topIndex == -1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public int getTopIndex() {

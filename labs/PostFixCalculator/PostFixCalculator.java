@@ -4,6 +4,7 @@
  * New York University
  */
 
+
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -39,66 +40,82 @@ public class PostFixCalculator {
         double Op1;
         double Op2;
         double product;
+        String warning = "Unable to properly perform calculation.";
         String pushBack;
 
         switch (input) {
             case "+":
                 try {
-                    Op2 = Double.parseDouble(this.calcStack.pop());
-                    Op1 = Double.parseDouble(this.calcStack.pop());
+                    Op2 = Double.parseDouble(this.calcStack.top());
+                    this.calcStack.pop();
+                    Op1 = Double.parseDouble(this.calcStack.top());
+                    this.calcStack.pop();
                     product = Op1 + Op2;
                     pushBack = "" + product;
                     this.calcStack.push(pushBack);
                 } catch (NumberFormatException ex) {
-                    System.out.println("Unable to properly parse number. Only enter numbers, operators, or parentheses.");
+                    System.out.println(warning);
                 }
                 break;
             case "-":
                 try {
-                    Op2 = Double.parseDouble(this.calcStack.pop());
-                    Op1 = Double.parseDouble(this.calcStack.pop());
+                    Op2 = Double.parseDouble(this.calcStack.top());
+                    this.calcStack.pop();
+                    Op1 = Double.parseDouble(this.calcStack.top());
+                    this.calcStack.pop();
                     product = Op1 - Op2;
                     pushBack = "" + product;
                     this.calcStack.push(pushBack);
                 } catch (NumberFormatException ex) {
-                    System.out.println("Unable to properly parse number. Only enter numbers, operators, or parentheses.");
+                    System.out.println(warning);
                 }
                 break;
             case "*":
                 try {
-                    Op2 = Double.parseDouble(this.calcStack.pop());
-                    Op1 = Double.parseDouble(this.calcStack.pop());
+                    Op2 = Double.parseDouble(this.calcStack.top());
+                    this.calcStack.pop();
+                    Op1 = Double.parseDouble(this.calcStack.top());
+                    this.calcStack.pop();
                     product = Op1 * Op2;
                     pushBack = "" + product;
                     this.calcStack.push(pushBack);
                 } catch (NumberFormatException ex) {
-                    System.out.println("Unable to properly parse number. Only enter numbers, operators, or parentheses.");
+                    System.out.println(warning);
                 }
                 break;
             case "/":
                 try {
-                    Op2 = Double.parseDouble(this.calcStack.pop());
-                    Op1 = Double.parseDouble(this.calcStack.pop());
+                    Op2 = Double.parseDouble(this.calcStack.top());
+                    this.calcStack.pop();
+                    Op1 = Double.parseDouble(this.calcStack.top());
+                    this.calcStack.pop();
                     product = Op1 / Op2;
                     pushBack = "" + product;
                     this.calcStack.push(pushBack);
                 } catch (NumberFormatException ex) {
-                    System.out.println("Unable to properly parse number. Only enter numbers, operators, or parentheses.");
+                    System.out.println(warning);
                 }
                 break;
             case "^":
                 try {
-                    Op2 = Double.parseDouble(this.calcStack.pop());
-                    Op1 = Double.parseDouble(this.calcStack.pop());
+                    Op2 = Double.parseDouble(this.calcStack.top());
+                    this.calcStack.pop();
+                    Op1 = Double.parseDouble(this.calcStack.top());
+                    this.calcStack.pop();
                     product = Math.pow(Op1, Op2);
                     pushBack = "" + product;
                     this.calcStack.push(pushBack);
                 } catch (NumberFormatException ex) {
-                    System.out.println("Unable to properly parse number. Only enter numbers, operators, or parentheses.");
+                    System.out.println(warning);
                 }
                 break;
             default:
-                this.calcStack.push(input);
+                try {
+                    int inputInt = Integer.parseInt(input);
+                    this.calcStack.push("" + inputInt);
+                } catch (NumberFormatException ex) {
+                    System.out.println("One of the inputs was not an integer.");
+                }
                 break;
         }
     }
@@ -107,7 +124,7 @@ public class PostFixCalculator {
         try {
             return Double.parseDouble(calcStack.top());
         } catch (NumberFormatException ex) {
-            System.out.println("Something went wrong; most likely something other than an operator or operand has been inserted. Answer set to 0.0.");
+            System.out.println("Error: Only insert integers and operators. Answer set to 0.0");
             return 0.0;
         }
     }
@@ -171,37 +188,43 @@ class Converter {
                     break;
                 case ")":
                     while (!(operatorStack.top().equals("("))) {
-                        this.PostFixResult += this.operatorStack.pop() + " ";
+                        this.PostFixResult += this.operatorStack.top() + " ";
+                        this.operatorStack.pop();
                     }
                     this.operatorStack.pop(); // One last time to remove "("
                     break;
                 case "*":
                     while (!(this.isLastOnStackLower("*"))) {
-                        this.PostFixResult += this.operatorStack.pop() + " ";
+                        this.PostFixResult += this.operatorStack.top() + " ";
+                        this.operatorStack.pop();
                     }
                     this.operatorStack.push("*");
                     break;
                 case "^":
                     while (!(this.isLastOnStackLower("^"))) {
-                        this.PostFixResult += this.operatorStack.pop() + " ";
+                        this.PostFixResult += this.operatorStack.top() + " ";
+                        this.operatorStack.pop();
                     }
                     this.operatorStack.push("^");
                     break;
                 case "/":
                     while (!(this.isLastOnStackLower("/"))) {
-                        this.PostFixResult += this.operatorStack.pop() + " ";
+                        this.PostFixResult += this.operatorStack.top() + " ";
+                        this.operatorStack.pop();
                     }
                     this.operatorStack.push("/");
                     break;
                 case "+":
                     while (!(this.isLastOnStackLower("+"))) {
-                        this.PostFixResult += this.operatorStack.pop() + " ";
+                        this.PostFixResult += this.operatorStack.top() + " ";
+                        this.operatorStack.pop();
                     }
                     this.operatorStack.push("+");
                     break;
                 case "-":
                     while (!(this.isLastOnStackLower("-"))) {
-                        this.PostFixResult += this.operatorStack.pop() + " ";
+                        this.PostFixResult += this.operatorStack.top() + " ";
+                        this.operatorStack.pop();
                     }
                     this.operatorStack.push("-");
                     break;
@@ -211,7 +234,8 @@ class Converter {
             }
         }
         while (!(this.operatorStack.top().equals("EMPTY"))) {
-            this.PostFixResult += " " + this.operatorStack.pop();
+            this.PostFixResult += this.operatorStack.top() + " ";
+            this.operatorStack.pop();
         }
         return this.PostFixResult;
     }
@@ -235,7 +259,7 @@ class Converter {
                 }
                 break;
             case "^":
-                if (lastOperand.equals("+") || lastOperand.equals("-") || lastOperand.equals("(") || lastOperand.equals("EMPTY")) {
+                if (lastOperand.equals("+") || lastOperand.equals("-") || lastOperand.equals("(") || lastOperand.equals("EMPTY") || lastOperand.equals("/") || lastOperand.equals("*")) {
                     condition = true;
                 } else {
                     condition = false;
