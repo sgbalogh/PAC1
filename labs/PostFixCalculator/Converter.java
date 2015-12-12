@@ -1,6 +1,6 @@
 import java.util.StringTokenizer;
 
-class Converter {
+public class Converter {
     private StringTokenizer tokenizer;
     private String[] tokenList;
     private int tokenCount;

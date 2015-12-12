@@ -3,12 +3,9 @@
  * PAC 1, Professor Evan Korth
  * New York University
  */
-
-
 import java.util.Scanner;
 
 public class PostFixCalculator {
-
     private Stack calcStack;
     private Converter inStringToPostString;
 
@@ -49,6 +46,7 @@ public class PostFixCalculator {
                     // because the last value on the stack could be a double (if the prior calculations had involved
                     // division). Numeric inputs from the user (handled by the 'default' condition, however, are parsed
                     // as integers.
+
                     Op2 = Double.parseDouble(this.calcStack.top());
                     this.calcStack.pop();
                     Op1 = Double.parseDouble(this.calcStack.top());
